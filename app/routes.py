@@ -1,5 +1,7 @@
-from flask import render_template
+from flask import render_template, flash, redirect
 from app import app
+from app.forms import LoginForm
+
 
 # This is called a route. Routes are responsible for determining
 # what happens when a visitor goes to a specific place on your website
@@ -29,3 +31,15 @@ def index():
 	# the view can try and load a template to provide to the user through
 	# the render template function
 	return render_template('index.html', title='Home', user=user, posts=posts)
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+	form = LoginForm()
+	if form.validate_on_submit():
+		# flash saves this message in a session backed queue which
+		# Jinja can later get with its native get_flashed_messages() function
+		# redirect simply redirects
+		flash('Login requested for user {}, remember_me={}'.format(form.username.data, form.remember_me.data))
+		return redirect('/index')
+	return render_template('login.html', title='Sign In', form=form)
