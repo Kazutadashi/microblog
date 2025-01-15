@@ -12,11 +12,15 @@ def index():
 	posts = [
 		{
 			'author': {'username': 'Owen'},
-			'body': {'Evelyn is the best'},
+			'body': 'Evelyn is the best',
 		},
 		{
 			'author': {'username': 'Evelyn'},
-			'body': {'Fun day with Owen in Moab!'},
+			'body': 'Fun day with Owen in Moab!',
+		},
+		{
+			'author': {'username': 'Owen'},
+			'body': 'I agree with Evelyn!!',
 		}
 	]
 
@@ -24,4 +28,4 @@ def index():
 	# to be visible tok the user. When we direct user to a function view
 	# the view can try and load a template to provide to the user through
 	# the render template function
-	return render_template('index.html', title='Home', user=user)
+	return render_template('index.html', title='Home', user=user, posts=posts)
