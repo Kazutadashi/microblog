@@ -1,4 +1,4 @@
-from flask import render_template, flash, redirect
+from flask import render_template, flash, redirect, url_for
 from app import app
 from app.forms import LoginForm
 
@@ -8,7 +8,11 @@ from app.forms import LoginForm
 # The function below is called the "view function", which in this case is pretty simple
 @app.route('/')
 @app.route('/index')
-def index():
+# note that when using url_for(), it will try and find this function view
+# and then execute it. So you can get there via a route, or by a url_for()
+# however once here, it will take the user to /charlie instead.
+# this allows you to change links easily, while maintain connections using url_for()
+def bobsanchez():
 	# create some mock objects to build a template around
 	user = {'username': 'The best girl'}
 	posts = [
@@ -41,5 +45,5 @@ def login():
 		# Jinja can later get with its native get_flashed_messages() function
 		# redirect simply redirects
 		flash('Login requested for user {}, remember_me={}'.format(form.username.data, form.remember_me.data))
-		return redirect('/index')
+		return redirect(url_for('bobsanchez'))
 	return render_template('login.html', title='Sign In', form=form)
