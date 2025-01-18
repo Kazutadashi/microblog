@@ -1,20 +1,33 @@
 from datetime import datetime, timezone
+from werkzeug.security import generate_password_hash, check_password_hash
 from typing import Optional
+from flask_login import UserMixin
 import sqlalchemy as sa
 import sqlalchemy.orm as so
-from app import db
+from app import db, login
+
+# comes from the LoginManager object
+@login.user_loader
+def load_user(id):
+    return db.session.get(User, int(id))
 
 # These back_populates things basically make it so that if you define a post
 # for this user, it will automatically add some "author" data in the Posts table for that user
 # its a fancy way of updating both tables at the same time, if one, or the other is updated
 # WriteOnlyMapped is basically the same as Mapped, but it wont load in queries unless specifically
 # queried.
-class User(db.Model):
+class User(UserMixin, db.Model):
     id:             so.Mapped[int] = so.mapped_column(primary_key=True)
     username:       so.Mapped[str] = so.mapped_column(sa.String(64), index=True, unique=True)
     email:          so.Mapped[str] = so.mapped_column(sa.String(120), index=True, unique=True)
     password_hash:  so.Mapped[Optional[str]] = so.mapped_column(sa.String(256))
     posts:          so.WriteOnlyMapped['Post'] = so.relationship(back_populates='author')
+
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
 
     def __repr__(self):
         return '<User {}'.format(self.username)
