@@ -98,11 +98,17 @@ class User(UserMixin, db.Model):
         return (
             sa.select(Post)
             # We are joining Post.author, but we will reference this from now as "of_type" Author
+            # On in other words, inner join Post to post.author as Author
             .join(Post.author.of_type(Author))
             # Now join the Authors.follower data to the rest of the query, and refer to this join as Follower
-            .join(Author.followers.of_type(Follower))
+            # Now outer join Authors to Followers
+            .join(Author.followers.of_type(Follower), isouter=True)
             # because we referred to the join as Follower, we can now restrict our search
-            .where(Follower.id == self.id)
+            # show results if the follower == current user id, or the author == current user id
+            .where(sa.or_(
+                Follower.id == self.id,
+                Author.id == self.id
+            ))
             .order_by(Post.timestamp.desc())
         )
 
