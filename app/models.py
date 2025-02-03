@@ -97,8 +97,11 @@ class User(UserMixin, db.Model):
         Follower = so.aliased(User)
         return (
             sa.select(Post)
+            # We are joining Post.author, but we will reference this from now as "of_type" Author
             .join(Post.author.of_type(Author))
+            # Now join the Authors.follower data to the rest of the query, and refer to this join as Follower
             .join(Author.followers.of_type(Follower))
+            # because we referred to the join as Follower, we can now restrict our search
             .where(Follower.id == self.id)
             .order_by(Post.timestamp.desc())
         )
