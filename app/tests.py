@@ -8,6 +8,9 @@ from app.models import User, Post, followers
 
 
 class UserModelCase(unittest.TestCase):
+    # These are always ran before each test.
+    # Sets up a context/environment to run in
+    # and then creates all?
     def setUp(self):
         self.app_context = app.app_context()
         self.app_context.push()
