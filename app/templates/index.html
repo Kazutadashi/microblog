@@ -2,7 +2,7 @@
 
 {% block content %}
     <h1>Hi, {{ current_user.username }}!</h1>
-    <form action="" method="">
+    <form action="" method="post">
         {{ form.hidden_tag() }}
         <p>
             {{ form.post.label }}<br>
@@ -11,7 +11,7 @@
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
-        <p> {{form.submit() }} </p>
+        <p> {{ form.submit() }} </p>
     </form>
     {% for post in posts %}
     <div>

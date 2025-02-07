@@ -33,17 +33,13 @@ def bobsanchez():
 		db.session.add(post)
 		db.session.commit()
 		flash('Your post is now live!')
+		# when submitting data, it is good practice to redirect to the same location
+		# after a post request. This removes strange reloading behavior, since it performs a GET
+		# and makes a GET the last response. This is called the "POST/Redirect/GET pattern
+		# and helps prevent duplicated data
 		return redirect(url_for('bobsanchez'))
-	posts = [
-		{
-			'author': {'username': 'John'},
-			'body': 'Beautiful day in Portland!'
-		},
-		{
-			'author': {'username': 'Susan'},
-			'body': 'The Avengers movie was so cool!'
-		}
-	]
+
+	posts = db.session.scalars(current_user.following_posts()).all()
 
 	# templates are the actual html documents, and they must be rendered
 	# to be visible tok the user. When we direct user to a function view
