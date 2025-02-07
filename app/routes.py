@@ -1,8 +1,8 @@
 from flask import render_template, flash, redirect, url_for, request
 from app import app, db
 from app.forms import LoginForm, RegistrationForm
-from app.models import User
-from app.forms import RegistrationForm, EditProfileForm, EmptyForm
+from app.models import User, Post
+from app.forms import RegistrationForm, EditProfileForm, EmptyForm, PostForm
 import sqlalchemy as sa
 from flask_login import current_user, login_user, logout_user, login_required
 from urllib.parse import urlsplit
@@ -19,27 +19,29 @@ def before_request():
 # This is called a route. Routes are responsible for determining
 # what happens when a visitor goes to a specific place on your website
 # The function below is called the "view function", which in this case is pretty simple
-@app.route('/')
-@app.route('/index')
+@app.route('/', methods=['GET', 'POST'])
+@app.route('/index', methods = ['GET', 'POST'])
 @login_required
 # note that when using url_for(), it will try and find this function view
 # and then execute it. So you can get there via a route, or by a url_for()
 # however once here, it will take the user to /charlie instead.
 # this allows you to change links easily, while maintain connections using url_for()
 def bobsanchez():
-	# create some mock objects to build a template around
+	form = PostForm()
+	if form.validate_on_submit():
+		post = Post(body=form.post.data, author=current_user)
+		db.session.add(post)
+		db.session.commit()
+		flash('Your post is now live!')
+		return redirect(url_for('bobsanchez'))
 	posts = [
 		{
-			'author': {'username': 'Owen'},
-			'body': 'Evelyn is the best',
+			'author': {'username': 'John'},
+			'body': 'Beautiful day in Portland!'
 		},
 		{
-			'author': {'username': 'Evelyn'},
-			'body': 'Fun day with Owen in Moab!',
-		},
-		{
-			'author': {'username': 'Owen'},
-			'body': 'I agree with Evelyn!!',
+			'author': {'username': 'Susan'},
+			'body': 'The Avengers movie was so cool!'
 		}
 	]
 
@@ -47,7 +49,7 @@ def bobsanchez():
 	# to be visible tok the user. When we direct user to a function view
 	# the view can try and load a template to provide to the user through
 	# the render template function
-	return render_template('index.html', title='Home', posts=posts)
+	return render_template('index.html', title='Home', posts=posts, form=form)
 
 
 @app.route('/login', methods=['GET', 'POST'])
