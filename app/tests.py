@@ -6,6 +6,7 @@ import unittest
 from app import app, db
 from app.models import User, Post, followers
 
+os.environ['DATABASE_URL'] = 'sqlite://'
 
 class UserModelCase(unittest.TestCase):
     # These are always ran before each test.
