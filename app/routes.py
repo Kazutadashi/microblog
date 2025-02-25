@@ -57,6 +57,8 @@ def login():
 	if current_user.is_authenticated:
 		return redirect(url_for('bobsanchez'))
 	form = LoginForm()
+	# When "submit" is clicked, it rerurns this route as a POST request, but with validated form input
+	# therefore, this function return True, and we continue down this logic
 	if form.validate_on_submit():
 		user = db.session.scalar(
 			sa.select(User).where(User.username == form.username.data)
