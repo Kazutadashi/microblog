@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Sign In</h1>
+    <h1>{{ _('Sign In') }}</h1>
     <form action="" method="post" novalidate>
         <!-- THIS IS SUPER IMPORTANT IN PREVENTING CSRF!!-->
         {{ form.hidden_tag() }}
@@ -9,7 +9,7 @@
             {{ form.username.label }}<br>
             {{ form.username(size=32) }}
             {% for error in form.username.errors %}
-            <span style="color: red;">[{{ error }}]</span>
+            <span style="color: red;">[{{ _(error) }}]</span>
             {% endfor %}
         </p>
         <p>
@@ -25,10 +25,10 @@
     </form>
 
     <p>
-        New User? <a href="{{ url_for('register') }}">Click to Register!</a>
+        {{_('New User?') }} <a href="{{ url_for('register') }}">{{ _('Click to Register!') }}</a>
     </p>
     <p>
-        Forgot Your Password?
-        <a href="{{ url_for('reset_password_request') }}">Click here to Reset It</a>
+        {{ _('Forgot Your Password?') }}
+        <a href="{{ url_for('reset_password_request') }}">{{ _('Click here to Reset It') }}</a>
     </p>
 {% endblock %}

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-03-01 13:15-0700\n"
-"PO-Revision-Date: 2025-03-01 13:25-0700\n"
+"POT-Creation-Date: 2025-03-01 13:45-0700\n"
+"PO-Revision-Date: 2025-03-01 13:34-0700\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh\n"
 "Language-Team: zh <LL@li.org>\n"
@@ -26,6 +26,18 @@ msgstr "请登录以访问此页面。"
 msgid "Username"
 msgstr "用户名"
 
+#: app/forms.py:11
+msgid "Password"
+msgstr "密码"
+
+#: app/forms.py:12
+msgid "Remember Me"
+msgstr "记住我"
+
+#: app/forms.py:13 app/templates/login.html:4
+msgid "Sign In"
+msgstr "登录"
+
 #: app/routes.py:37
 msgid "Your post is now live!"
 msgstr "您的帖子已上线！"
@@ -38,4 +50,41 @@ msgstr "用户 %(username)s 未找到。"
 #: app/templates/404.html:4
 msgid "File Not Found"
 msgstr "文件未找到"
+
+#: app/templates/_post.html:17
+#, python-format
+msgid "%(username)s said %(when)s"
+msgstr "%(username)s 在 %(when)s 说"
+
+#: app/templates/base.html:16
+msgid "Microblog"
+msgstr "微博客"
+
+#: app/templates/base.html:23
+msgid "Home"
+msgstr "主页"
+
+#: app/templates/base.html:26
+msgid "Explore"
+msgstr "探索"
+
+#: app/templates/base.html:32
+msgid "Login"
+msgstr "登录"
+
+#: app/templates/login.html:28
+msgid "New User?"
+msgstr "新用户？"
+
+#: app/templates/login.html:28
+msgid "Click to Register!"
+msgstr "点击注册！"
+
+#: app/templates/login.html:31
+msgid "Forgot Your Password?"
+msgstr "忘记密码？"
+
+#: app/templates/login.html:32
+msgid "Click here to Reset It"
+msgstr "点击此处重置"
 
