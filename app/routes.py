@@ -8,7 +8,7 @@ import sqlalchemy as sa
 from flask_login import current_user, login_user, logout_user, login_required
 from urllib.parse import urlsplit
 from datetime import datetime, timezone
-
+from flask_babel import _, lazy_gettext as _l
 
 
 @app.before_request
@@ -34,7 +34,7 @@ def bobsanchez():
 		post = Post(body=form.post.data, author=current_user)
 		db.session.add(post)
 		db.session.commit()
-		flash('Your post is now live!')
+		flash(_('Your post is now live!')) # the _() function is used to mark something for translation
 		# when submitting data, it is good practice to redirect to the same location
 		# after a post request. This removes strange reloading behavior, since it performs a GET
 		# and makes a GET the last response. This is called the "POST/Redirect/GET pattern
@@ -136,7 +136,8 @@ def follow(username):
 			sa.select(User).where(User.username == username)
 		)
 		if user is None:
-			flash(f'User {username} not found.')
+			# here we can see an example of old formatting style for babel
+			flash(_('User %(username)s not found.', username=username))
 			return redirect(url_for('bobsanchez'))
 		if user == current_user:
 			flash('You cannot follow yourself!')

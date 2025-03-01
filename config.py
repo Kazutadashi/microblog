@@ -14,3 +14,4 @@ class Config:
     ADMINS = ['example@test.com']
     FUNNY = os.environ.get('FUNNY')
     POSTS_PER_PAGE = 10
+    LANGUAGES = ['en', 'zh']
