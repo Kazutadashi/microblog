@@ -54,6 +54,16 @@
                 integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
                 crossorigin="anonymous">
         </script>
+        <p>{{ g.locale }}</p>
         {{ moment.include_moment() }}
+        <!--
+            moment does not support zh, it uses zh-cn specifically. If we see zh, convert it zh-CN
+            here for dates and times
+        -->
+        {% if g.locale == 'zh' %}
+            {{ moment.lang('zh-cn') }}
+        {% else %}
+            {{ moment.lang(g.locale) }}
+        {% endif %}
     </body>
 </html>

@@ -1,4 +1,4 @@
-from flask import render_template, flash, redirect, url_for, request
+from flask import render_template, flash, redirect, url_for, request, g
 from app import app, db
 from app.forms import LoginForm, RegistrationForm, ResetPasswordRequestForm
 from app.models import User, Post
@@ -8,7 +8,7 @@ import sqlalchemy as sa
 from flask_login import current_user, login_user, logout_user, login_required
 from urllib.parse import urlsplit
 from datetime import datetime, timezone
-from flask_babel import _, lazy_gettext as _l
+from flask_babel import _, lazy_gettext as _l, get_locale
 
 
 @app.before_request
@@ -16,6 +16,7 @@ def before_request():
 	if current_user.is_authenticated:
 		current_user.last_seen = datetime.now(timezone.utc)
 		db.session.commit()
+		g.locale = str(get_locale())
 
 
 # This is called a route. Routes are responsible for determining
