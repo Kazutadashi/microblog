@@ -14,6 +14,7 @@ from logging.handlers import RotatingFileHandler
 import os
 
 def get_locale():
+    # the languages defined in config.py LANGUAGES also determine what locales are allowed
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 app = Flask(__name__)
