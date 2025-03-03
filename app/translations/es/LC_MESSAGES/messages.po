@@ -1,4 +1,4 @@
-# Chinese translations for PROJECT.
+# Spanish translations for PROJECT.
 # Copyright (C) 2025 ORGANIZATION
 # This file is distributed under the same license as the PROJECT project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
@@ -8,11 +8,11 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2025-03-02 23:58-0700\n"
-"PO-Revision-Date: 2025-03-01 13:34-0700\n"
+"PO-Revision-Date: 2025-03-02 23:56-0700\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: zh\n"
-"Language-Team: zh <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: es\n"
+"Language-Team: es <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,71 +20,70 @@ msgstr ""
 
 #: app/__init__.py:25
 msgid "Please log in to access this page."
-msgstr "请登录以访问此页面。"
+msgstr "Por favor, inicie sesión para acceder a esta página."
 
 #: app/forms.py:10
 msgid "Username"
-msgstr "用户名"
+msgstr "Nombre de usuario"
 
 #: app/forms.py:11
 msgid "Password"
-msgstr "密码"
+msgstr "Contraseña"
 
 #: app/forms.py:12
 msgid "Remember Me"
-msgstr "记住我"
+msgstr "Recuérdame"
 
 #: app/forms.py:13 app/templates/login.html:4
 msgid "Sign In"
-msgstr "登录"
+msgstr "Iniciar sesión"
 
 #: app/routes.py:38
 msgid "Your post is now live!"
-msgstr "您的帖子已上线！"
+msgstr "¡Tu publicación ya está en vivo!"
 
 #: app/routes.py:141
 #, python-format
 msgid "User %(username)s not found."
-msgstr "用户 %(username)s 未找到。"
+msgstr "Usuario %(username)s no encontrado."
 
 #: app/templates/404.html:4
 msgid "File Not Found"
-msgstr "文件未找到"
+msgstr "Archivo no encontrado"
 
 #: app/templates/_post.html:17
 #, python-format
 msgid "%(username)s said %(when)s"
-msgstr "%(username)s 在 %(when)s 说"
+msgstr "%(username)s dijo %(when)s"
 
 #: app/templates/base.html:16
 msgid "Microblog"
-msgstr "微博客"
+msgstr "Microblog"
 
 #: app/templates/base.html:23
 msgid "Home"
-msgstr "主页"
+msgstr "Inicio"
 
 #: app/templates/base.html:26
 msgid "Explore"
-msgstr "探索"
+msgstr "Explorar"
 
 #: app/templates/base.html:32
 msgid "Login"
-msgstr "登录"
+msgstr "Iniciar sesión"
 
 #: app/templates/login.html:28
 msgid "New User?"
-msgstr "新用户？"
+msgstr "¿Nuevo usuario?"
 
 #: app/templates/login.html:28
 msgid "Click to Register!"
-msgstr "点击注册！"
+msgstr "¡Haz clic para registrarte!"
 
 #: app/templates/login.html:31
 msgid "Forgot Your Password?"
-msgstr "忘记密码？"
+msgstr "¿Olvidaste tu contraseña?"
 
 #: app/templates/login.html:32
 msgid "Click here to Reset It"
-msgstr "点击此处重置"
-
+msgstr "Haz clic aquí para restablecerla"
