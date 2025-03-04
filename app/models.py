@@ -138,6 +138,7 @@ class Post(db.Model):
     author:     so.Mapped[User] = so.relationship(back_populates='posts')
     about_me: so.Mapped[Optional[str]] = so.mapped_column(sa.String(140))
     last_seen: so.Mapped[Optional[datetime]] = so.mapped_column(default=lambda: datetime.now(timezone.utc))
+    language: so.Mapped[Optional[str]] = so.mapped_column(sa.String(5))
 
     def __repr__(self):
         return '<Post {}>'.format(self.body)
