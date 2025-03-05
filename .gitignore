@@ -2,6 +2,7 @@
 .venv/
 .git/
 .idea/
+logs/
 __pycache__
 app.db
 messages.pot
