@@ -15,3 +15,4 @@ class Config:
     FUNNY = os.environ.get('FUNNY')
     POSTS_PER_PAGE = 10
     LANGUAGES = ['en', 'zh', 'es']
+    MS_TRANSLATOR_KEY = os.environ.get('MS_TRANSLATOR_KEY')
