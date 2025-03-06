@@ -1,5 +1,6 @@
 from flask import render_template, flash, redirect, url_for, request, g
 from app import app, db
+from app.translate import translate
 from app.forms import LoginForm, RegistrationForm, ResetPasswordRequestForm
 from app.models import User, Post
 from app.email import send_email, send_password_reset_email
@@ -212,3 +213,9 @@ def reset_password(token):
 		flash('Your password has been reset.')
 		return redirect(url_for('login'))
 	return render_template('reset_password.html', form=form)
+
+@app.route('/translate', methods=['POST'])
+@login_required
+def translate_text():
+	data = request.get_json()
+	return {'text': translate(data['text'], data['source_language'], data['dest_language'])}
