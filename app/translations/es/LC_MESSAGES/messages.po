@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-03-02 23:58-0700\n"
+"POT-Creation-Date: 2025-03-05 23:02-0700\n"
 "PO-Revision-Date: 2025-03-02 23:56-0700\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: es\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.17.0\n"
 
-#: app/__init__.py:25
+#: app/__init__.py:26
 msgid "Please log in to access this page."
 msgstr "Por favor, inicie sesión para acceder a esta página."
 
@@ -38,14 +38,22 @@ msgstr "Recuérdame"
 msgid "Sign In"
 msgstr "Iniciar sesión"
 
-#: app/routes.py:38
+#: app/routes.py:42
 msgid "Your post is now live!"
 msgstr "¡Tu publicación ya está en vivo!"
 
-#: app/routes.py:141
+#: app/routes.py:145
 #, python-format
 msgid "User %(username)s not found."
 msgstr "Usuario %(username)s no encontrado."
+
+#: app/translate.py:8
+msgid "Error: the translation service is not configured."
+msgstr "Error: el servicio de traducción no está configurado."
+
+#: app/translate.py:43
+msgid "Error: the translation service failed."
+msgstr "Error: el servicio de traducción ha fallado."
 
 #: app/templates/404.html:4
 msgid "File Not Found"
@@ -55,6 +63,10 @@ msgstr "Archivo no encontrado"
 #, python-format
 msgid "%(username)s said %(when)s"
 msgstr "%(username)s dijo %(when)s"
+
+#: app/templates/_post.html:26
+msgid "Translate"
+msgstr "Traducir"
 
 #: app/templates/base.html:16
 msgid "Microblog"
@@ -87,3 +99,4 @@ msgstr "¿Olvidaste tu contraseña?"
 #: app/templates/login.html:32
 msgid "Click here to Reset It"
 msgstr "Haz clic aquí para restablecerla"
+
