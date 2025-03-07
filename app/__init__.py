@@ -28,6 +28,9 @@ mail = Mail(app)
 moment = Moment(app)
 babel = Babel(app, locale_selector=get_locale)
 
+from app.errors import bp as errors_bp
+app.register_blueprint(errors_bp)
+
 # dont run if the app is in debug mode
 if not app.debug:
     # if there is a valid mail server
@@ -66,4 +69,4 @@ if not app.debug:
     app.logger.setLevel(logging.INFO)
     app.logger.info('Microblog startup')
 
-from app import routes, models, errors, cli
+from app import routes, models, cli
