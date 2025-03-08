@@ -3,18 +3,22 @@ os.environ['DATABASE_URL'] = 'sqlite://'
 
 from datetime import datetime, timezone, timedelta
 import unittest
-from app import db
+from app import db, create_app
 from flask import current_app
 from app.models import User, Post, followers
+from config import Config
 
-os.environ['DATABASE_URL'] = 'sqlite://'
+class TestConfig(Config):
+    TESTING = True
+    SQLALCHEMY_DATABASE_URI = 'sqlite://'
 
 class UserModelCase(unittest.TestCase):
     # These are always ran before each test.
     # Sets up a context/environment to run in
     # and then creates all?
     def setUp(self):
-        self.app_context = current_app.app_context()
+        self.app = create_app(TestConfig)
+        self.app_context = self.app.app_context()
         self.app_context.push()
         db.create_all()
 

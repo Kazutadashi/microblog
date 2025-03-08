@@ -1,4 +1,5 @@
 .flaskenv
+.env
 .venv/
 .git/
 .idea/
