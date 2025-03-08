@@ -2,13 +2,11 @@ from flask import render_template, flash, redirect, url_for, request, g
 from app import app, db
 from app.translate import translate
 from app.models import User, Post
-from app.email import send_email
-from app.forms import EditProfileForm, EmptyForm, PostForm
+from app.main.forms import EditProfileForm, EmptyForm, PostForm
 import sqlalchemy as sa
-from flask_login import current_user, login_user, logout_user, login_required
-from urllib.parse import urlsplit
+from flask_login import current_user, login_required
 from datetime import datetime, timezone
-from flask_babel import _, lazy_gettext as _l, get_locale
+from flask_babel import _, get_locale
 from langdetect import detect, LangDetectException
 
 @app.before_request

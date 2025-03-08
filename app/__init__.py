@@ -1,5 +1,4 @@
 from flask import Flask, request
-from flask_wtf.file import file_required
 from flask_mail import Mail
 from flask_moment import Moment
 from config import Config
@@ -30,8 +29,12 @@ babel = Babel(app, locale_selector=get_locale)
 
 from app.errors import bp as errors_bp
 app.register_blueprint(errors_bp)
+
 from app.auth import bp as auth_bp
 app.register_blueprint(auth_bp, url_prefix='/auth')
+
+from app.main import bp as main_bp
+app.register_blueprint(main_bp)
 
 # dont run if the app is in debug mode
 if not app.debug:
@@ -71,4 +74,4 @@ if not app.debug:
     app.logger.setLevel(logging.INFO)
     app.logger.info('Microblog startup')
 
-from app import routes, models, cli
+from app import models, cli
