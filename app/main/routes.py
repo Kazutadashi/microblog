@@ -61,8 +61,8 @@ def user(username):
 	page = request.args.get('page', 1, type=int)
 	query = user.posts.select().order_by(Post.timestamp.desc())
 	posts = db.paginate(query, page=page, per_page=current_app.config['POSTS_PER_PAGE'], error_out=False)
-	next_url = url_for('user', username=user.username, page=posts.next_num) if posts.has_next else None
-	prev_url = url_for('user', username=user.username, page=posts.prev_num) if posts.has_prev else None
+	next_url = url_for('main.user', username=user.username, page=posts.next_num) if posts.has_next else None
+	prev_url = url_for('main.user', username=user.username, page=posts.prev_num) if posts.has_prev else None
 	form = EmptyForm()
 	return render_template('user.html', user=user, posts=posts.items, form=form, next_url=next_url, prev_url=prev_url)
 
@@ -75,7 +75,7 @@ def edit_profile():
 		current_user.about_me = form.about_me.data
 		db.session.commit()
 		flash('Your changes have been saved.')
-		return redirect(url_for('edit_profile'))
+		return redirect(url_for('main.edit_profile'))
 	# when a user simply just visits this page, it becomes a GET request
 	# so this part of the code runs instead of the POST part
 	elif request.method == 'GET':
@@ -101,13 +101,13 @@ def follow(username):
 			return redirect(url_for('main.bobsanchez'))
 		if user == current_user:
 			flash('You cannot follow yourself!')
-			return redirect(url_for('user', username=username))
+			return redirect(url_for('main.user', username=username))
 		current_user.follow(user)
 		db.session.commit()
 		flash(f'You are now following {username}!')
-		return redirect(url_for('user', username=username))
+		return redirect(url_for('main.user', username=username))
 	else:
-		return redirect(url_for('index'))
+		return redirect(url_for('main.index'))
 
 @bp.route('/unfollow/<username>', methods=['POST'])
 @login_required
@@ -122,11 +122,11 @@ def unfollow(username):
 			return redirect(url_for('main.bobsanchez'))
 		if user == current_user:
 			flash('You cannot unfollow yourself!')
-			return redirect(url_for('user', username=username))
+			return redirect(url_for('main.user', username=username))
 		current_user.unfollow(user)
 		db.session.commit()
 		flash(f'You are not following {username}.')
-		return redirect(url_for('user', username=username))
+		return redirect(url_for('main.user', username=username))
 	else:
 		return redirect(url_for('main.bobsanchez'))
 
