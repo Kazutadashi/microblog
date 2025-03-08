@@ -1,5 +1,6 @@
-from flask import render_template, flash, redirect, url_for, request, g
-from app import app, db
+from flask import render_template, flash, redirect, url_for, request, g, current_app
+from app import db
+from app.main import bp
 from app.translate import translate
 from app.models import User, Post
 from app.main.forms import EditProfileForm, EmptyForm, PostForm
@@ -9,7 +10,7 @@ from datetime import datetime, timezone
 from flask_babel import _, get_locale
 from langdetect import detect, LangDetectException
 
-@app.before_request
+@bp.before_request
 def before_request():
 	if current_user.is_authenticated:
 		current_user.last_seen = datetime.now(timezone.utc)
@@ -19,8 +20,8 @@ def before_request():
 # This is called a route. Routes are responsible for determining
 # what happens when a visitor goes to a specific place on your website
 # The function below is called the "view function", which in this case is pretty simple
-@app.route('/', methods=['GET', 'POST'])
-@app.route('/index', methods = ['GET', 'POST'])
+@bp.route('/', methods=['GET', 'POST'])
+@bp.route('/index', methods = ['GET', 'POST'])
 @login_required
 # note that when using url_for(), it will try and find this function view
 # and then execute it. So you can get there via a route, or by a url_for()
@@ -41,31 +42,31 @@ def bobsanchez():
 		# after a post request. This removes strange reloading behavior, since it performs a GET
 		# and makes a GET the last response. This is called the "POST/Redirect/GET pattern
 		# and helps prevent duplicated data
-		return redirect(url_for('bobsanchez'))
+		return redirect(url_for('main.bobsanchez'))
 
 	page = request.args.get('page', 1, type=int)
-	posts = db.paginate(current_user.following_posts(), page=page, per_page=app.config['POSTS_PER_PAGE'], error_out=False)
-	next_url = url_for('bobsanchez', page=posts.next_num) if posts.has_next else None
-	prev_url = url_for('bobsanchez', page=posts.prev_num) if posts.has_prev else None
+	posts = db.paginate(current_user.following_posts(), page=page, per_page=current_app.config['POSTS_PER_PAGE'], error_out=False)
+	next_url = url_for('main.bobsanchez', page=posts.next_num) if posts.has_next else None
+	prev_url = url_for('main.bobsanchez', page=posts.prev_num) if posts.has_prev else None
 	# templates are the actual html documents, and they must be rendered
 	# to be visible tok the user. When we direct user to a function view
 	# the view can try and load a template to provide to the user through
 	# the render template function
 	return render_template('index.html', title='Home', posts=posts, form=form, next_url=next_url, prev_url=prev_url)
 
-@app.route('/user/<username>')
+@bp.route('/user/<username>')
 @login_required
 def user(username):
 	user = db.first_or_404(sa.select(User).where(User.username == username))
 	page = request.args.get('page', 1, type=int)
 	query = user.posts.select().order_by(Post.timestamp.desc())
-	posts = db.paginate(query, page=page, per_page=app.config['POSTS_PER_PAGE'], error_out=False)
+	posts = db.paginate(query, page=page, per_page=current_app.config['POSTS_PER_PAGE'], error_out=False)
 	next_url = url_for('user', username=user.username, page=posts.next_num) if posts.has_next else None
 	prev_url = url_for('user', username=user.username, page=posts.prev_num) if posts.has_prev else None
 	form = EmptyForm()
 	return render_template('user.html', user=user, posts=posts.items, form=form, next_url=next_url, prev_url=prev_url)
 
-@app.route('/edit_profile', methods=['GET', 'POST'])
+@bp.route('/edit_profile', methods=['GET', 'POST'])
 @login_required
 def edit_profile():
 	form = EditProfileForm(current_user.username)
@@ -86,7 +87,7 @@ def edit_profile():
 # These aren't really "real" routes. Its more of a method to route the user to some specific logic
 # This route also redirects the user in every situation, so you never see this page. It just performs its logics
 # and then goes back to something specific.
-@app.route('/follow/<username>', methods=['POST'])
+@bp.route('/follow/<username>', methods=['POST'])
 @login_required
 def follow(username):
 	form = EmptyForm()
@@ -97,7 +98,7 @@ def follow(username):
 		if user is None:
 			# here we can see an example of old formatting style for babel
 			flash(_('User %(username)s not found.', username=username))
-			return redirect(url_for('bobsanchez'))
+			return redirect(url_for('main.bobsanchez'))
 		if user == current_user:
 			flash('You cannot follow yourself!')
 			return redirect(url_for('user', username=username))
@@ -108,7 +109,7 @@ def follow(username):
 	else:
 		return redirect(url_for('index'))
 
-@app.route('/unfollow/<username>', methods=['POST'])
+@bp.route('/unfollow/<username>', methods=['POST'])
 @login_required
 def unfollow(username):
 	form = EmptyForm()
@@ -118,7 +119,7 @@ def unfollow(username):
 		)
 		if user is None:
 			flash(f'User {username} not found.')
-			return redirect(url_for('bobsanchez'))
+			return redirect(url_for('main.bobsanchez'))
 		if user == current_user:
 			flash('You cannot unfollow yourself!')
 			return redirect(url_for('user', username=username))
@@ -127,18 +128,18 @@ def unfollow(username):
 		flash(f'You are not following {username}.')
 		return redirect(url_for('user', username=username))
 	else:
-		return redirect(url_for('bobsanchez'))
+		return redirect(url_for('main.bobsanchez'))
 
-@app.route('/explore')
+@bp.route('/explore')
 @login_required
 def explore():
 	page = request.args.get('page', 1, type=int)
 	query = sa.select(Post).order_by(Post.timestamp.desc())
-	posts = db.paginate(query, page=page, per_page=app.config['POSTS_PER_PAGE'], error_out=False)
+	posts = db.paginate(query, page=page, per_page=current_app.config['POSTS_PER_PAGE'], error_out=False)
 
 	return render_template('index.html', title='Explore', posts=posts.items)
 
-@app.route('/translate', methods=['POST'])
+@bp.route('/translate', methods=['POST'])
 @login_required
 def translate_text():
 	data = request.get_json()

@@ -1,11 +1,11 @@
-from app import app
+from flask import Blueprint
 import os
 import click
 
-print('cli loaded!')
+bp = Blueprint('cli', __name__, cli_group=None)
 
 # This defines a command line group, which means when this function is run, all subcommand are run as well
-@app.cli.group()
+@bp.cli.group()
 def translate():
     """Translation and localization commands."""
     pass

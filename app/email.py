@@ -1,6 +1,7 @@
 from flask import render_template
 from flask_mail import Message
-from app import app, mail
+from app import mail
+from flask import current_app
 from threading import Thread
 
 # make an sync wrapper function to send the mail asynchronously
@@ -22,7 +23,7 @@ def send_email(subject, sender, recipients, text_body, html_body):
     # this basically "primes" the function and says "go do your work, and tell me if you have downtime so I
     # can continue exection elsewhere". You can also set daemon=True to say that this thread should just be killed
     # no matter what if nothing else is running.
-    Thread(target=send_async_email, args=(app, msg)).start()
+    Thread(target=send_async_email, args=(current_app._get_current_object(), msg)).start()
 
 
 

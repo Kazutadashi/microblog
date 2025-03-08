@@ -1,14 +1,14 @@
 from flask_babel import _
-from app import app
+from flask import current_app
 import requests, uuid, json
 
 def translate(text, source_language, dest_language):
 
-    if 'MS_TRANSLATOR_KEY' not in app.config or not app.config['MS_TRANSLATOR_KEY']:
+    if 'MS_TRANSLATOR_KEY' not in current_app.config or not current_app.config['MS_TRANSLATOR_KEY']:
         return _('Error: the translation service is not configured.')
 
     # Add your key and endpoint
-    key = app.config['MS_TRANSLATOR_KEY']
+    key = current_app.config['MS_TRANSLATOR_KEY']
     endpoint = "https://api.cognitive.microsofttranslator.com"
 
     # location, also known as region.

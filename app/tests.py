@@ -3,7 +3,8 @@ os.environ['DATABASE_URL'] = 'sqlite://'
 
 from datetime import datetime, timezone, timedelta
 import unittest
-from app import app, db
+from app import db
+from flask import current_app
 from app.models import User, Post, followers
 
 os.environ['DATABASE_URL'] = 'sqlite://'
@@ -13,7 +14,7 @@ class UserModelCase(unittest.TestCase):
     # Sets up a context/environment to run in
     # and then creates all?
     def setUp(self):
-        self.app_context = app.app_context()
+        self.app_context = current_app.app_context()
         self.app_context.push()
         db.create_all()
 
