@@ -10,6 +10,7 @@ import logging
 # why is SMTPHandler under logging?
 from logging.handlers import SMTPHandler
 from logging.handlers import RotatingFileHandler
+from elasticsearch import Elasticsearch
 import os
 
 
@@ -25,7 +26,7 @@ babel = Babel()
 
 def get_locale():
     # the languages defined in config.py LANGUAGES also determine what locales are allowed
-    return request.accept_languages.best_match(current_app.config['LANGUAGES'])
+    return request.accept_languages.best_match(config['LANGUAGES'])
 
 
 def create_app(config_class=Config):
@@ -37,6 +38,8 @@ def create_app(config_class=Config):
     mail.init_app(app)
     moment.init_app(app)
     babel.init_app(app)
+    app.elasticsearch = Elasticsearch([app.config['ELASTICSEARCH_URL']]) \
+        if app.config['ELASTICSEARCH_URL'] else None
 
     from app.errors import bp as errors_bp
     app.register_blueprint(errors_bp)
