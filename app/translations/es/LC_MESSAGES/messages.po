@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-03-05 23:02-0700\n"
+"POT-Creation-Date: 2025-03-13 23:05-0600\n"
 "PO-Revision-Date: 2025-03-02 23:56-0700\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: es\n"
@@ -18,34 +18,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.17.0\n"
 
-#: app/__init__.py:26
+#: app/__init__.py:21
 msgid "Please log in to access this page."
 msgstr "Por favor, inicie sesión para acceder a esta página."
-
-#: app/forms.py:10
-msgid "Username"
-msgstr "Nombre de usuario"
-
-#: app/forms.py:11
-msgid "Password"
-msgstr "Contraseña"
-
-#: app/forms.py:12
-msgid "Remember Me"
-msgstr "Recuérdame"
-
-#: app/forms.py:13 app/templates/login.html:4
-msgid "Sign In"
-msgstr "Iniciar sesión"
-
-#: app/routes.py:42
-msgid "Your post is now live!"
-msgstr "¡Tu publicación ya está en vivo!"
-
-#: app/routes.py:145
-#, python-format
-msgid "User %(username)s not found."
-msgstr "Usuario %(username)s no encontrado."
 
 #: app/translate.py:8
 msgid "Error: the translation service is not configured."
@@ -55,48 +30,65 @@ msgstr "Error: el servicio de traducción no está configurado."
 msgid "Error: the translation service failed."
 msgstr "Error: el servicio de traducción ha fallado."
 
-#: app/templates/404.html:4
-msgid "File Not Found"
-msgstr "Archivo no encontrado"
+#: app/auth/forms.py:10
+msgid "Username"
+msgstr "Nombre de usuario"
 
-#: app/templates/_post.html:17
-#, python-format
-msgid "%(username)s said %(when)s"
-msgstr "%(username)s dijo %(when)s"
+#: app/auth/forms.py:11
+msgid "Password"
+msgstr "Contraseña"
 
-#: app/templates/_post.html:26
-msgid "Translate"
-msgstr "Traducir"
+#: app/auth/forms.py:12
+msgid "Remember Me"
+msgstr "Recuérdame"
 
-#: app/templates/base.html:16
-msgid "Microblog"
-msgstr "Microblog"
-
-#: app/templates/base.html:23
-msgid "Home"
-msgstr "Inicio"
-
-#: app/templates/base.html:26
-msgid "Explore"
-msgstr "Explorar"
-
-#: app/templates/base.html:32
-msgid "Login"
+#: app/auth/forms.py:13
+msgid "Sign In"
 msgstr "Iniciar sesión"
 
-#: app/templates/login.html:28
-msgid "New User?"
-msgstr "¿Nuevo usuario?"
+#: app/main/forms.py:37 app/main/routes.py:162
+msgid "Search"
+msgstr "Buscar"
 
-#: app/templates/login.html:28
-msgid "Click to Register!"
-msgstr "¡Haz clic para registrarte!"
+#: app/main/routes.py:41
+msgid "Your post is now live!"
+msgstr "¡Tu publicación ya está en vivo!"
 
-#: app/templates/login.html:31
-msgid "Forgot Your Password?"
-msgstr "¿Olvidaste tu contraseña?"
+#: app/main/routes.py:101
+#, python-format
+msgid "User %(username)s not found."
+msgstr "Usuario %(username)s no encontrado."
 
-#: app/templates/login.html:32
-msgid "Click here to Reset It"
-msgstr "Haz clic aquí para restablecerla"
+#~ msgid "File Not Found"
+#~ msgstr "Archivo no encontrado"
+
+#~ msgid "%(username)s said %(when)s"
+#~ msgstr "%(username)s dijo %(when)s"
+
+#~ msgid "Translate"
+#~ msgstr "Traducir"
+
+#~ msgid "Microblog"
+#~ msgstr "Microblog"
+
+#~ msgid "Home"
+#~ msgstr "Inicio"
+
+#~ msgid "Explore"
+#~ msgstr "Explorar"
+
+#~ msgid "Login"
+#~ msgstr "Iniciar sesión"
+
+#~ msgid "New User?"
+#~ msgstr "¿Nuevo usuario?"
+
+#~ msgid "Click to Register!"
+#~ msgstr "¡Haz clic para registrarte!"
+
+#~ msgid "Forgot Your Password?"
+#~ msgstr "¿Olvidaste tu contraseña?"
+
+#~ msgid "Click here to Reset It"
+#~ msgstr "Haz clic aquí para restablecerla"
 

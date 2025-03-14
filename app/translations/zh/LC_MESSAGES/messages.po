@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-03-05 23:02-0700\n"
+"POT-Creation-Date: 2025-03-13 23:05-0600\n"
 "PO-Revision-Date: 2025-03-01 13:34-0700\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh\n"
@@ -18,34 +18,9 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.17.0\n"
 
-#: app/__init__.py:26
+#: app/__init__.py:21
 msgid "Please log in to access this page."
 msgstr "请登录以访问此页面。"
-
-#: app/forms.py:10
-msgid "Username"
-msgstr "用户名"
-
-#: app/forms.py:11
-msgid "Password"
-msgstr "密码"
-
-#: app/forms.py:12
-msgid "Remember Me"
-msgstr "记住我"
-
-#: app/forms.py:13 app/templates/login.html:4
-msgid "Sign In"
-msgstr "登录"
-
-#: app/routes.py:42
-msgid "Your post is now live!"
-msgstr "您的帖子已上线！"
-
-#: app/routes.py:145
-#, python-format
-msgid "User %(username)s not found."
-msgstr "用户 %(username)s 未找到。"
 
 #: app/translate.py:8
 msgid "Error: the translation service is not configured."
@@ -55,48 +30,65 @@ msgstr "错误：翻译服务未配置。"
 msgid "Error: the translation service failed."
 msgstr "错误：翻译服务失败。"
 
-#: app/templates/404.html:4
-msgid "File Not Found"
-msgstr "文件未找到"
+#: app/auth/forms.py:10
+msgid "Username"
+msgstr "用户名"
 
-#: app/templates/_post.html:17
-#, python-format
-msgid "%(username)s said %(when)s"
-msgstr "%(username)s 在 %(when)s 说"
+#: app/auth/forms.py:11
+msgid "Password"
+msgstr "密码"
 
-#: app/templates/_post.html:26
-msgid "Translate"
-msgstr "翻译"
+#: app/auth/forms.py:12
+msgid "Remember Me"
+msgstr "记住我"
 
-#: app/templates/base.html:16
-msgid "Microblog"
-msgstr "微博客"
-
-#: app/templates/base.html:23
-msgid "Home"
-msgstr "主页"
-
-#: app/templates/base.html:26
-msgid "Explore"
-msgstr "探索"
-
-#: app/templates/base.html:32
-msgid "Login"
+#: app/auth/forms.py:13
+msgid "Sign In"
 msgstr "登录"
 
-#: app/templates/login.html:28
-msgid "New User?"
-msgstr "新用户？"
+#: app/main/forms.py:37 app/main/routes.py:162
+msgid "Search"
+msgstr "搜索"
 
-#: app/templates/login.html:28
-msgid "Click to Register!"
-msgstr "点击注册！"
+#: app/main/routes.py:41
+msgid "Your post is now live!"
+msgstr "您的帖子已上线！"
 
-#: app/templates/login.html:31
-msgid "Forgot Your Password?"
-msgstr "忘记密码？"
+#: app/main/routes.py:101
+#, python-format
+msgid "User %(username)s not found."
+msgstr "用户 %(username)s 未找到。"
 
-#: app/templates/login.html:32
-msgid "Click here to Reset It"
-msgstr "点击此处重置"
+#~ msgid "File Not Found"
+#~ msgstr "文件未找到"
+
+#~ msgid "%(username)s said %(when)s"
+#~ msgstr "%(username)s 在 %(when)s 说"
+
+#~ msgid "Translate"
+#~ msgstr "翻译"
+
+#~ msgid "Microblog"
+#~ msgstr "微博客"
+
+#~ msgid "Home"
+#~ msgstr "主页"
+
+#~ msgid "Explore"
+#~ msgstr "探索"
+
+#~ msgid "Login"
+#~ msgstr "登录"
+
+#~ msgid "New User?"
+#~ msgstr "新用户？"
+
+#~ msgid "Click to Register!"
+#~ msgstr "点击注册！"
+
+#~ msgid "Forgot Your Password?"
+#~ msgstr "忘记密码？"
+
+#~ msgid "Click here to Reset It"
+#~ msgstr "点击此处重置"
 

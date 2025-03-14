@@ -50,6 +50,9 @@ def create_app(config_class=Config):
     from app.main import bp as main_bp
     app.register_blueprint(main_bp)
 
+    from app.cli import bp as cli_bp
+    app.register_blueprint(cli_bp)
+
     # dont run if the app is in debug mode
     if not app.debug and not app.testing:
         # if there is a valid mail server
@@ -87,6 +90,7 @@ def create_app(config_class=Config):
 
         app.logger.setLevel(logging.INFO)
         app.logger.info('Microblog startup')
+
 
     from app import models, cli
     return app
