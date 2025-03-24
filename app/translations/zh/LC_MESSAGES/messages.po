@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-03-13 23:05-0600\n"
+"POT-Creation-Date: 2025-03-24 06:37-0600\n"
 "PO-Revision-Date: 2025-03-01 13:34-0700\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh\n"
@@ -46,18 +46,34 @@ msgstr "记住我"
 msgid "Sign In"
 msgstr "登录"
 
-#: app/main/forms.py:37 app/main/routes.py:162
+#: app/main/forms.py:37 app/main/routes.py:163
 msgid "Search"
 msgstr "搜索"
 
-#: app/main/routes.py:41
+#: app/main/forms.py:47
+msgid "Message"
+msgstr ""
+
+#: app/main/forms.py:48
+msgid "Submit"
+msgstr ""
+
+#: app/main/routes.py:42
 msgid "Your post is now live!"
 msgstr "您的帖子已上线！"
 
-#: app/main/routes.py:101
+#: app/main/routes.py:102
 #, python-format
 msgid "User %(username)s not found."
 msgstr "用户 %(username)s 未找到。"
+
+#: app/main/routes.py:183
+msgid "Your message has been sent."
+msgstr ""
+
+#: app/main/routes.py:185
+msgid "Send Message"
+msgstr ""
 
 #~ msgid "File Not Found"
 #~ msgstr "文件未找到"
