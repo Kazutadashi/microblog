@@ -9,6 +9,7 @@ import sqlalchemy as sa
 import sqlalchemy.orm as so
 from hashlib import md5
 from time import time
+import json
 import jwt
 
 # comes from the LoginManager object
@@ -83,6 +84,9 @@ class User(UserMixin, db.Model):
     posts:          so.WriteOnlyMapped['Post'] = so.relationship(back_populates='author')
     about_me: so.Mapped[Optional[str]] = so.mapped_column(sa.String(140))
     last_seen: so.Mapped[Optional[datetime]] = so.mapped_column(default=lambda: datetime.now(timezone.utc))
+    notifications:  so.WriteOnlyMapped['Notification'] = so.relationship(
+        back_populates='user'
+    )
     # col name # expected data type         # how it relates to other columns
     following: so.WriteOnlyMapped['User'] = so.relationship(
         # says which table we are connecting
@@ -105,6 +109,14 @@ class User(UserMixin, db.Model):
     messages_received: so.WriteOnlyMapped['Message'] = so.relationship(
         foreign_keys='Message.recipient_id', back_populates='recipient'
     )
+
+    def add_notification(self, name, data):
+        db.session.execute(self.notifications.delete().where(
+            Notification.name == name
+        ))
+        n = Notification(name=name, payload_json=json.dumps(data, user=self))
+        db.session.add(n)
+        return n
 
     def get_reset_password_token(self, expires_in=600):
         return jwt.encode(
@@ -220,6 +232,18 @@ class Message(db.Model):
 
     def __repr__(self):
         return '<Message {}>'.format(self.body)
+
+class Notification(db.Model):
+    id: so.Mapped[int] = so.mapped_column(primary_key = True)
+    name: so.Mapped[str] = so.mapped_column(sa.String(128), index=True)
+    user_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey(User.id), index=True)
+    timestamp: so.Mapped[float] = so.mapped_column(index=True, default=time)
+    payload_json: so.Mapped[str] = so.mapped_column(sa.Text)
+
+    user: so.Mapped[User] = so.relationship(back_populates='notifications')
+
+    def get_data(self):
+        return json.loads(str(self.payload_json))
 
 db.event.listen(db.session, 'before_commit', SearchableMixin.before_commit)
 db.event.listen(db.session, 'after_commit', SearchableMixin.after_commit)
