@@ -53,6 +53,9 @@ def create_app(config_class=Config):
     from app.cli import bp as cli_bp
     app.register_blueprint(cli_bp)
 
+    from app.api import bp as api_bp
+    app.register_blueprint(api_bp, url_prefix='/api')
+
     # dont run if the app is in debug mode
     if not app.debug and not app.testing:
         # if there is a valid mail server
