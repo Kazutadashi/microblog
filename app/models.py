@@ -28,6 +28,28 @@ followers = sa.Table(
 )
 
 
+class PaginatedAPIMixin(object):
+    @staticmethod
+    def to_collection_dict(query, page, per_page, endpoint, **kwargs):
+        resources = db.paginate(query, page=page, per_page=per_page, error_out=False)
+
+        data = {
+            'items': [item.to_dict() for item in resources.items],
+            '_meta': {
+                'page': page,
+                'per_page': per_page,
+                'total_pages': resources.pages,
+                'total_items': resources.total
+            },
+            '_links': {
+                'self': url_for(endpoint, page=page, per_page=per_page, **kwargs),
+                'next': url_for(endpoint, page=page + 1, per_page=per_page, **kwargs) if resources.has_next else None,
+                'next': url_for(endpoint, page=page - 1, per_page=per_page, **kwargs) if resources.has_prev else None,
+            }
+        }
+        return data
+
+
 class SearchableMixin(object):
     @classmethod
     def search(cls, expression, page, per_page):
@@ -76,7 +98,7 @@ class SearchableMixin(object):
 # its a fancy way of updating both tables at the same time, if one, or the other is updated
 # WriteOnlyMapped is basically the same as Mapped, but it wont load in queries unless specifically
 # queried.
-class User(UserMixin, db.Model):
+class User(PaginatedAPIMixin, UserMixin, db.Model):
     id:             so.Mapped[int] = so.mapped_column(primary_key=True)
     username:       so.Mapped[str] = so.mapped_column(sa.String(64), index=True, unique=True)
     email:          so.Mapped[str] = so.mapped_column(sa.String(120), index=True, unique=True)
@@ -278,6 +300,9 @@ class Notification(db.Model):
 
     def get_data(self):
         return json.loads(str(self.payload_json))
+
+
+
 
 db.event.listen(db.session, 'before_commit', SearchableMixin.before_commit)
 db.event.listen(db.session, 'after_commit', SearchableMixin.after_commit)
