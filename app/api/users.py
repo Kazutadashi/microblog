@@ -48,6 +48,16 @@ def create_user():
 
 @bp.route('/users/<int:id>', methods=['PUT'])
 def update_user(id):
-    pass
-
-
+    user = db.get_or_404(User, id)
+    data = request.get_json()
+    if 'username' in data and data['username'] != user.username and \
+        db.session.scalar(sa.select(User).where(
+            User.username == data['username'])):
+        return bad_request('please use a different username')
+    if 'email' in data and data['email'] != user.email and \
+        db.session.scalar(sa.select(User).where(
+            User.email == data['email'])):
+        return bad_request('please use a different email address')
+    user.from_dict(data, new_user=False)
+    db.session.commit()
+    return user.to_dict()
