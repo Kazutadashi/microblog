@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, current_app
 from flask_mail import Mail
 from flask_moment import Moment
 from config import Config
@@ -6,6 +6,8 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_babel import Babel, lazy_gettext as _l
+from redis import Redis
+import rq
 import logging
 # why is SMTPHandler under logging?
 from logging.handlers import SMTPHandler
@@ -26,7 +28,7 @@ babel = Babel()
 
 def get_locale():
     # the languages defined in config.py LANGUAGES also determine what locales are allowed
-    return request.accept_languages.best_match(config['LANGUAGES'])
+    return request.accept_languages.best_match(current_app.config['LANGUAGES'])
 
 
 def create_app(config_class=Config):
@@ -40,6 +42,8 @@ def create_app(config_class=Config):
     babel.init_app(app)
     app.elasticsearch = Elasticsearch([app.config['ELASTICSEARCH_URL']]) \
         if app.config['ELASTICSEARCH_URL'] else None
+    app.redis = Redis.from_url(app.config['REDIS_URL'])
+    app.task_queue = rq.Queue('microblog-tasks', connection=app.redis)
 
     from app.errors import bp as errors_bp
     app.register_blueprint(errors_bp)
