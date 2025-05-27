@@ -15,15 +15,24 @@ def send_async_email(app, msg):
         # The context is basically like a temporary global variable. It is made possible by thread-local storage
         mail.send(msg)
 
-def send_email(subject, sender, recipients, text_body, html_body):
+def send_email(subject, sender, recipients, text_body, html_body, attachments=None, sync=False):
     msg = Message(subject, sender=sender, recipients=recipients)
     msg.body = text_body
     msg.html = html_body
-    # create a new thread and use it call the function with the specified args
-    # this basically "primes" the function and says "go do your work, and tell me if you have downtime so I
-    # can continue exection elsewhere". You can also set daemon=True to say that this thread should just be killed
-    # no matter what if nothing else is running.
-    Thread(target=send_async_email, args=(current_app._get_current_object(), msg)).start()
+
+    if attachments:
+        for attachment in attachments:
+            msg.attach(*attachment)
+    if sync:
+        mail.send(msg)
+    else:
+        # create a new thread and use it call the function with the specified args
+        # this basically "primes" the function and says "go do your work, and tell me if you have downtime so I
+        # can continue exception elsewhere". You can also set daemon=True to say that this thread should just be killed
+        # no matter what if nothing else is running.
+        Thread(target=send_async_email, args=(current_app._get_current_object(), msg)).start()
+
+
 
 
 
