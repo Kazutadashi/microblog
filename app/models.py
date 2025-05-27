@@ -285,6 +285,19 @@ class User(PaginatedAPIMixin, UserMixin, db.Model):
             return None
         return user
 
+    def launch_task(self, name, description, *args, **kwargs):
+        rq_job = current_app.task_queue.enqueue(f'app.tasks.{name}', self.id, *args, **kwargs)
+        task = Task(id=rq_job.id, name=name, description=description, user=self)
+        db.session.add(task)
+
+    def get_tasks_in_progress(self):
+        query = self.tasks.select().where(Task.complete == False)
+        return db.session.scalars(query)
+
+    def get_task_in_progress(self, name):
+        query = self.tasks.select().where(Task.name == name, Task.complete == False)
+        return db.session.scalars(query)
+
 
 class Post(SearchableMixin, db.Model):
     id:         so.Mapped[int] = so.mapped_column(primary_key=True)
