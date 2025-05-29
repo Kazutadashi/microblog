@@ -1,4 +1,6 @@
 from datetime import datetime, timezone, timedelta
+
+from celery.worker.consumer import Tasks
 from werkzeug.security import generate_password_hash, check_password_hash
 from typing import Optional
 from flask_login import UserMixin

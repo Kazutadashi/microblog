@@ -31,7 +31,15 @@
         </tr>
     </table>
     {% if user == current_user %}
-    <p><a href="{{ url_for('main.edit_profile') }}">Edit your profile</a></p>
+    <p><a href="{{ url_for('main.edit_profile') }}">{{ _('Edit your profile') }}</a></p>
+    {{ current_user.get_task_in_progress('export_posts') }}
+        {% if not current_user.get_task_in_progress('export_posts') %}
+            <p>
+                <a href="{{ url_for('main.export_posts') }}">
+                    {{ _('Export your posts') }}
+                </a>
+            </p>
+        {% endif %}
     {% endif %}
     {% for post in posts %}
         {% include '_post.html' %}
@@ -42,6 +50,7 @@
     {% if next_url %}
     <a href="{{ next_url }}">>></a>
     {% endif %}
+
 
     {% if user != current_user %}
     <p>
