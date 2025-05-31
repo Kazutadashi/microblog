@@ -36,7 +36,7 @@ def export_posts(user_id):
         i = 0
         total_posts = db.session.scalar(sa.select(sa.func.count()).select_from(
             user.posts.select().subquery()))
-        for post in db.session.scalar(user.posts.select().order_by(
+        for post in db.session.scalars(user.posts.select().order_by(
             Post.timestamp.asc())):
             data.append({'body': post.body,
                          'timestamp': post.timestamp.isoformat() + 'Z'})
@@ -47,8 +47,8 @@ def export_posts(user_id):
         send_email(
             '[Microblog] Your blog posts',
             sender=app.config['ADMINS'][0], recipients=[user.email],
-            text_body=render_template('main/email/export_posts.txt', user=user),
-            html_body=render_template('main/email/export_posts.html', user=user),
+            text_body=render_template('email/export_posts.txt', user=user),
+            html_body=render_template('email/export_posts.html', user=user),
             attachments=[('posts.json', 'application/json', json.dumps({'posts': data}, indent=4))],
             sync=True
         )
