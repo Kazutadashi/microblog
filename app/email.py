@@ -1,4 +1,3 @@
-from flask import render_template
 from flask_mail import Message
 from app import mail
 from flask import current_app
