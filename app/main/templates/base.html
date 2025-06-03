@@ -72,7 +72,23 @@
                 {% endfor %}
             {% endif %}
             {% endwith %}
-            {% block content %}{% endblock %}
+
+            <div class="container">
+                    {% if current_user.is_authenticated %}
+                    {% with tasks = current_user.get_tasks_in_progress() %}
+                    {% if tasks %}
+                        {% for task in tasks %}
+                        <div class="alert alert-success" role="alert">
+                            {{ task.description }}
+                            <span id="{{ task.id }}-progress">{{ task.get_progress() }}</span>%
+                        </div>
+                        {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                    {% endif %}
+            </div>
+
+            {% block content %} {% endblock %}
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
