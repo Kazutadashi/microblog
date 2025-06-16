@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-03-24 06:37-0600\n"
+"POT-Creation-Date: 2025-06-02 19:05-0600\n"
 "PO-Revision-Date: 2025-03-01 13:34-0700\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.17.0\n"
 
-#: app/__init__.py:21
+#: app/__init__.py:23
 msgid "Please log in to access this page."
 msgstr "请登录以访问此页面。"
 
@@ -29,6 +29,10 @@ msgstr "错误：翻译服务未配置。"
 #: app/translate.py:43
 msgid "Error: the translation service failed."
 msgstr "错误：翻译服务失败。"
+
+#: app/auth/email.py:7
+msgid "[Microblog] Reset your password"
+msgstr ""
 
 #: app/auth/forms.py:10
 msgid "Username"
@@ -67,12 +71,20 @@ msgstr "您的帖子已上线！"
 msgid "User %(username)s not found."
 msgstr "用户 %(username)s 未找到。"
 
-#: app/main/routes.py:183
+#: app/main/routes.py:184
 msgid "Your message has been sent."
 msgstr ""
 
-#: app/main/routes.py:185
+#: app/main/routes.py:186
 msgid "Send Message"
+msgstr ""
+
+#: app/main/routes.py:226
+msgid "An export task is currently in progress."
+msgstr ""
+
+#: app/main/routes.py:228
+msgid "Exporting posts..."
 msgstr ""
 
 #~ msgid "File Not Found"

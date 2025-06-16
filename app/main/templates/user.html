@@ -32,11 +32,17 @@
     </table>
     {% if user == current_user %}
         {% if not current_user.get_task_in_progress('export_posts') %}
+            {% if is_redis_active %}
             <p>
                 <a href="{{ url_for('main.export_posts') }}">
                     {{ _('Export your posts') }}
                 </a>
             </p>
+            {% else %}
+            <p>
+                Post exports are currently unavailable
+            </p>
+            {% endif %}
         {% endif %}
     {% endif %}
     {% for post in posts %}

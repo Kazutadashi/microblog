@@ -1,3 +1,4 @@
+from redis import Redis
 from flask import render_template, flash, redirect, url_for, request, g, current_app
 from app import db
 from app.main import bp
@@ -66,7 +67,19 @@ def user(username):
 	next_url = url_for('main.user', username=user.username, page=posts.next_num) if posts.has_next else None
 	prev_url = url_for('main.user', username=user.username, page=posts.prev_num) if posts.has_prev else None
 	form = EmptyForm()
-	return render_template('user.html', user=user, posts=posts.items, form=form, next_url=next_url, prev_url=prev_url)
+
+	# Check if redis is working before providing a way for user to export posts. Then if its not, display something
+	# else to prevent a crash.
+	is_redis_active = False
+	try:
+		r = getattr(current_app, 'redis')
+		r.ping()
+		is_redis_active = True
+	except Exception:
+		is_redis_active = False
+
+	return render_template('user.html', user=user, posts=posts.items, form=form,
+						   next_url=next_url, prev_url=prev_url, is_redis_active=is_redis_active)
 
 @bp.route('/edit_profile', methods=['GET', 'POST'])
 @login_required
