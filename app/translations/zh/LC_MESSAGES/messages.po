@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-06-02 19:05-0600\n"
+"POT-Creation-Date: 2025-06-16 16:41-0600\n"
 "PO-Revision-Date: 2025-03-01 13:34-0700\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh\n"
@@ -32,7 +32,7 @@ msgstr "错误：翻译服务失败。"
 
 #: app/auth/email.py:7
 msgid "[Microblog] Reset your password"
-msgstr ""
+msgstr "[Microblog] 重置您的密码"
 
 #: app/auth/forms.py:10
 msgid "Username"
@@ -50,42 +50,131 @@ msgstr "记住我"
 msgid "Sign In"
 msgstr "登录"
 
-#: app/main/forms.py:37 app/main/routes.py:163
+#: app/main/forms.py:37 app/main/routes.py:176
 msgid "Search"
 msgstr "搜索"
 
 #: app/main/forms.py:47
 msgid "Message"
-msgstr ""
+msgstr "消息"
 
 #: app/main/forms.py:48
 msgid "Submit"
-msgstr ""
+msgstr "提交"
 
-#: app/main/routes.py:42
+#: app/main/routes.py:43
 msgid "Your post is now live!"
 msgstr "您的帖子已上线！"
 
-#: app/main/routes.py:102
+#: app/main/routes.py:115
 #, python-format
 msgid "User %(username)s not found."
 msgstr "用户 %(username)s 未找到。"
 
-#: app/main/routes.py:184
+#: app/main/routes.py:197
 msgid "Your message has been sent."
-msgstr ""
+msgstr "您的消息已发送。"
 
-#: app/main/routes.py:186
+#: app/main/routes.py:199
 msgid "Send Message"
-msgstr ""
+msgstr "发送消息"
 
-#: app/main/routes.py:226
+#: app/main/routes.py:239
 msgid "An export task is currently in progress."
-msgstr ""
+msgstr "正在进行导出任务。"
 
-#: app/main/routes.py:228
+#: app/main/routes.py:241
 msgid "Exporting posts..."
-msgstr ""
+msgstr "正在导出帖子..."
+
+#: app/main/templates/_post.html:15
+#, python-format
+msgid "%(username)s said %(when)s"
+msgstr "%(username)s 在 %(when)s 说"
+
+#: app/main/templates/_post.html:24
+msgid "Translate"
+msgstr "翻译"
+
+#: app/main/templates/base.html:16
+msgid "Microblog"
+msgstr "微博"
+
+#: app/main/templates/base.html:23
+msgid "Home"
+msgstr "首页"
+
+#: app/main/templates/base.html:26
+msgid "Explore"
+msgstr "探索"
+
+#: app/main/templates/base.html:41
+msgid "Login"
+msgstr "登录"
+
+#: app/main/templates/base.html:46 app/main/templates/messages.html:4
+msgid "Messages"
+msgstr "消息"
+
+#: app/main/templates/messages.html:12
+msgid "Newer messages"
+msgstr "更新的消息"
+
+#: app/main/templates/messages.html:17
+msgid "Older messages"
+msgstr "更早的消息"
+
+#: app/main/templates/search.html:4
+#, fuzzy
+msgid "Search Results"
+msgstr "搜索"
+
+#: app/main/templates/search.html:12
+msgid "Newer posts"
+msgstr "更新的帖子"
+
+#: app/main/templates/search.html:17
+msgid "Older posts"
+msgstr "更早的帖子"
+
+#: app/main/templates/send_message.html:6
+#, python-format
+msgid "Send Message to %(recipient)s"
+msgstr "发送消息给 %(recipient)s"
+
+#: app/main/templates/user.html:38
+msgid "Export your posts"
+msgstr "导出您的帖子"
+
+#: app/main/templates/user.html:43
+msgid "Post exports are currently unavailable"
+msgstr "帖子导出当前不可用"
+
+#: app/main/templates/user.html:62
+msgid "Send private message"
+msgstr "发送私信"
+
+#: app/main/templates/user_popup.html:7
+msgid "Last seen on"
+msgstr "上次在线时间"
+
+#: app/main/templates/user_popup.html:10
+#, python-format
+msgid "%(count)d followers"
+msgstr "%(count)d 个粉丝"
+
+#: app/main/templates/user_popup.html:10
+#, python-format
+msgid "%(count)d following"
+msgstr "关注了 %(count)d 人"
+
+#: app/main/templates/user_popup.html:17
+msgid "Follow"
+msgstr "关注"
+
+#: app/main/templates/user_popup.html:24
+msgid "Unfollow"
+msgstr "取消关注"
 
 #~ msgid "File Not Found"
 #~ msgstr "文件未找到"

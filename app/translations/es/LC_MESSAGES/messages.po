@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-06-02 19:05-0600\n"
+"POT-Creation-Date: 2025-06-16 16:41-0600\n"
 "PO-Revision-Date: 2025-03-02 23:56-0700\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: es\n"
@@ -32,7 +32,7 @@ msgstr "Error: el servicio de traducción ha fallado."
 
 #: app/auth/email.py:7
 msgid "[Microblog] Reset your password"
-msgstr ""
+msgstr "[Microblog] Restablece tu contraseña"
 
 #: app/auth/forms.py:10
 msgid "Username"
@@ -50,42 +50,131 @@ msgstr "Recuérdame"
 msgid "Sign In"
 msgstr "Iniciar sesión"
 
-#: app/main/forms.py:37 app/main/routes.py:163
+#: app/main/forms.py:37 app/main/routes.py:176
 msgid "Search"
 msgstr "Buscar"
 
 #: app/main/forms.py:47
 msgid "Message"
-msgstr ""
+msgstr "Mensaje"
 
 #: app/main/forms.py:48
 msgid "Submit"
-msgstr ""
+msgstr "Enviar"
 
-#: app/main/routes.py:42
+#: app/main/routes.py:43
 msgid "Your post is now live!"
 msgstr "¡Tu publicación ya está en vivo!"
 
-#: app/main/routes.py:102
+#: app/main/routes.py:115
 #, python-format
 msgid "User %(username)s not found."
 msgstr "Usuario %(username)s no encontrado."
 
-#: app/main/routes.py:184
+#: app/main/routes.py:197
 msgid "Your message has been sent."
-msgstr ""
+msgstr "Tu mensaje ha sido enviado."
 
-#: app/main/routes.py:186
+#: app/main/routes.py:199
 msgid "Send Message"
-msgstr ""
+msgstr "Enviar mensaje"
 
-#: app/main/routes.py:226
+#: app/main/routes.py:239
 msgid "An export task is currently in progress."
-msgstr ""
+msgstr "Una tarea de exportación está en curso."
 
-#: app/main/routes.py:228
+#: app/main/routes.py:241
 msgid "Exporting posts..."
-msgstr ""
+msgstr "Exportando publicaciones..."
+
+#: app/main/templates/_post.html:15
+#, python-format
+msgid "%(username)s said %(when)s"
+msgstr "%(username)s dijo %(when)s"
+
+#: app/main/templates/_post.html:24
+msgid "Translate"
+msgstr "Traducir"
+
+#: app/main/templates/base.html:16
+msgid "Microblog"
+msgstr "Microblog"
+
+#: app/main/templates/base.html:23
+msgid "Home"
+msgstr "Inicio"
+
+#: app/main/templates/base.html:26
+msgid "Explore"
+msgstr "Explorar"
+
+#: app/main/templates/base.html:41
+msgid "Login"
+msgstr "Iniciar sesión"
+
+#: app/main/templates/base.html:46 app/main/templates/messages.html:4
+msgid "Messages"
+msgstr "Mensajes"
+
+#: app/main/templates/messages.html:12
+msgid "Newer messages"
+msgstr "Mensajes más recientes"
+
+#: app/main/templates/messages.html:17
+msgid "Older messages"
+msgstr "Mensajes más antiguos"
+
+#: app/main/templates/search.html:4
+#, fuzzy
+msgid "Search Results"
+msgstr "Buscar"
+
+#: app/main/templates/search.html:12
+msgid "Newer posts"
+msgstr "Publicaciones más recientes"
+
+#: app/main/templates/search.html:17
+msgid "Older posts"
+msgstr "Publicaciones más antiguas"
+
+#: app/main/templates/send_message.html:6
+#, python-format
+msgid "Send Message to %(recipient)s"
+msgstr "Enviar mensaje a %(recipient)s"
+
+#: app/main/templates/user.html:38
+msgid "Export your posts"
+msgstr "Exporta tus publicaciones"
+
+#: app/main/templates/user.html:43
+msgid "Post exports are currently unavailable"
+msgstr "La exportación de publicaciones no está disponible actualmente"
+
+#: app/main/templates/user.html:62
+msgid "Send private message"
+msgstr "Enviar mensaje privado"
+
+#: app/main/templates/user_popup.html:7
+msgid "Last seen on"
+msgstr "Última vez visto el"
+
+#: app/main/templates/user_popup.html:10
+#, python-format
+msgid "%(count)d followers"
+msgstr "%(count)d seguidores"
+
+#: app/main/templates/user_popup.html:10
+#, python-format
+msgid "%(count)d following"
+msgstr "%(count)d seguidos"
+
+#: app/main/templates/user_popup.html:17
+msgid "Follow"
+msgstr "Seguir"
+
+#: app/main/templates/user_popup.html:24
+msgid "Unfollow"
+msgstr "Dejar de seguir"
 
 #~ msgid "File Not Found"
 #~ msgstr "Archivo no encontrado"
